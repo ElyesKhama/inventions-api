@@ -16,12 +16,12 @@ public class ReadJSON {
 			Object obj = parser.parse(new FileReader("src/main/resources/static/inventions.json"));
 
 			jsonArray = (JSONArray) obj;
-						
+
 		} catch (IOException | ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return jsonArray;
 
 	}

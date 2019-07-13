@@ -4,39 +4,31 @@ import java.util.ArrayList;
 
 public class Invention {
 
-	private long id;
-	private int date;
+	private int id;
+	private long date;
 	private String name;
 	private String inventor;
 	private String origine;
 	private String site;
 	private ArrayList<String> tags;
 
-	public Invention(long id, int date, String name, String inventor, String origine, String site,
-			ArrayList<String> tags) {
-		super();
-		this.id = id;
-		this.date = date;
-		this.name = name;
-		this.inventor = inventor;
-		this.origine = origine;
-		this.site = site;
-		this.tags = tags;
+	public Invention() {
+		
 	}
 
-	public long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
-	public int getDate() {
+	public long getDate() {
 		return date;
 	}
 
-	public void setDate(int date) {
+	public void setDate(long date) {
 		this.date = date;
 	}
 
