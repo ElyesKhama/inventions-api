@@ -56,4 +56,14 @@ public class InventionController {
 	public List<Invention> getInventionsByTag(@PathVariable("tag") String tag) {
 		return InventionsCRUD.getInventionsByTag(tag);
 	}
+
+	@RequestMapping(value = "/inventions/{id}/discovery", method = RequestMethod.GET)
+	public Invention getInventionWithCommonPoints(@PathVariable("id") int id) {
+		Invention invention = InventionsCRUD.getInventionById(id);
+		if(invention.getTags() != null) {
+			return InventionsCRUD.getInventionWithCommonPoints(invention);
+		}
+		
+		return null;
+	}
 }

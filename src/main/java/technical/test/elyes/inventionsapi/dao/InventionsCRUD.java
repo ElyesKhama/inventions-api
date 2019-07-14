@@ -54,7 +54,7 @@ public class InventionsCRUD {
 
 		for (int i = 0; i < listInventions.size(); i++) {
 			Invention inv = listInventions.get(i);
-			if(inv.getTags() != null) {
+			if (inv.getTags() != null) {
 				if (inv.getTags().contains(tag)) {
 					listInv.add(inv);
 				}
@@ -62,6 +62,40 @@ public class InventionsCRUD {
 		}
 
 		return listInv;
+	}
+
+	public static Invention getInventionWithCommonPoints(Invention inv) {
+		int counter = 0;
+		int counterTmp = 0;
+		Invention inventionReturn = null;
+
+		for (int i = 0; i < listInventions.size(); i++) {
+			Invention invloop = listInventions.get(i);
+			if (invloop.getTags() != null && invloop.getName() != inv.getName()) {
+				counterTmp = getNumberOfCommonTags(invloop, inv);
+				if(counterTmp > counter) {
+					inventionReturn = invloop;
+					counter = counterTmp;
+				}
+			}
+		}
+		
+		return inventionReturn;
+	}
+	
+	public static int getNumberOfCommonTags(Invention inv1, Invention inv2) {
+		int counter = 0;
+		
+		ArrayList<String> listTags1 = inv1.getTags();
+		ArrayList<String> listTags2 = inv2.getTags();
+
+		for(int i=0;i<listTags1.size();i++) {
+			if(listTags2.contains(listTags1.get(i))) {
+				counter++;
+			}
+		}
+		
+		return counter;
 	}
 
 	public static ArrayList<Invention> buildListInventions() {
