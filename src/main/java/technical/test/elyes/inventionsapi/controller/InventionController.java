@@ -1,5 +1,6 @@
 package technical.test.elyes.inventionsapi.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -44,5 +45,15 @@ public class InventionController {
 		return null;
 	}
 
+	@RequestMapping(value = "/inventions/init", method = RequestMethod.PUT)
+	@ResponseBody
+	public String putInvention(@Valid @RequestBody ArrayList<Invention> listInv) {
+		InventionsCRUD.putInvention(listInv);
+		return null;
+	}
 
+	@RequestMapping(value = "/inventions/tag/{tag}", method = RequestMethod.GET)
+	public List<Invention> getInventionsByTag(@PathVariable("tag") String tag) {
+		return InventionsCRUD.getInventionsByTag(tag);
+	}
 }

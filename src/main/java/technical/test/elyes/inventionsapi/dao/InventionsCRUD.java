@@ -9,7 +9,7 @@ import technical.test.elyes.inventionsapi.model.Invention;
 
 public class InventionsCRUD {
 
-	static ArrayList<Invention> listInventions = buildListInvention();
+	static ArrayList<Invention> listInventions = buildListInventions();
 
 	public static ArrayList<Invention> getInventions() {
 
@@ -42,10 +42,29 @@ public class InventionsCRUD {
 			if (inv.getId() == id)
 				listInventions.remove(i);
 		}
-		
+
 	}
 
-	public static ArrayList<Invention> buildListInvention() {
+	public static void putInvention(ArrayList<Invention> listInv) {
+		listInventions = listInv;
+	}
+
+	public static ArrayList<Invention> getInventionsByTag(String tag) {
+		ArrayList<Invention> listInv = new ArrayList<Invention>();
+
+		for (int i = 0; i < listInventions.size(); i++) {
+			Invention inv = listInventions.get(i);
+			if(inv.getTags() != null) {
+				if (inv.getTags().contains(tag)) {
+					listInv.add(inv);
+				}
+			}
+		}
+
+		return listInv;
+	}
+
+	public static ArrayList<Invention> buildListInventions() {
 		ArrayList<Invention> inventionsList = new ArrayList<Invention>();
 
 		JSONArray jsonArray = ReadJSON.ReadJSONFile();
