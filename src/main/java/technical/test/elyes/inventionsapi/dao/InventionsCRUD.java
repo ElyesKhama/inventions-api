@@ -8,16 +8,16 @@ import org.json.simple.JSONObject;
 import technical.test.elyes.inventionsapi.model.Invention;
 
 public class InventionsCRUD {
-	
+
 	static ArrayList<Invention> listInventions = buildListInvention();
-	
+
 	public static ArrayList<Invention> getInventions() {
 
 		return listInventions;
 	}
 
 	public static Invention getInventionById(int id) {
-		
+
 		Invention inv = null;
 
 		for (int i = 0; i < listInventions.size(); i++) {
@@ -48,7 +48,15 @@ public class InventionsCRUD {
 			inventionsList.add(invention);
 		}
 
+		// sort the list by date
+		inventionsList.sort(new SortByDate());
+
 		return inventionsList;
 	}
-	
+
+	public static void postInvention(Invention inv) {
+		listInventions.add(inv);
+		// sort the list by date
+		listInventions.sort(new SortByDate());
+	}
 }
