@@ -2,6 +2,7 @@ package technical.test.elyes.inventionsapi.model;
 
 import java.util.ArrayList;
 
+//Model class for invention
 public class Invention {
 
 	private int id;
@@ -13,7 +14,7 @@ public class Invention {
 	private ArrayList<String> tags;
 
 	public Invention() {
-		
+
 	}
 
 	public int getId() {

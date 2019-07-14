@@ -9,10 +9,14 @@ import technical.test.elyes.inventionsapi.model.Invention;
 
 public class InventionsCRUD {
 
+	/*
+	 * Load the inventionList from the JSON when building the class (cause no
+	 * persistance needed)
+	 */
+
 	static ArrayList<Invention> listInventions = buildListInventions();
 
 	public static ArrayList<Invention> getInventions() {
-
 		return listInventions;
 	}
 
@@ -73,28 +77,28 @@ public class InventionsCRUD {
 			Invention invloop = listInventions.get(i);
 			if (invloop.getTags() != null && invloop.getName() != inv.getName()) {
 				counterTmp = getNumberOfCommonTags(invloop, inv);
-				if(counterTmp > counter) {
+				if (counterTmp > counter) {
 					inventionReturn = invloop;
 					counter = counterTmp;
 				}
 			}
 		}
-		
+
 		return inventionReturn;
 	}
-	
+
 	public static int getNumberOfCommonTags(Invention inv1, Invention inv2) {
 		int counter = 0;
-		
+
 		ArrayList<String> listTags1 = inv1.getTags();
 		ArrayList<String> listTags2 = inv2.getTags();
 
-		for(int i=0;i<listTags1.size();i++) {
-			if(listTags2.contains(listTags1.get(i))) {
+		for (int i = 0; i < listTags1.size(); i++) {
+			if (listTags2.contains(listTags1.get(i))) {
 				counter++;
 			}
 		}
-		
+
 		return counter;
 	}
 
@@ -113,7 +117,6 @@ public class InventionsCRUD {
 			invention.setOrigine((String) obj.get("origine"));
 			invention.setSite((String) obj.get("site"));
 			invention.setTags((ArrayList<String>) obj.get("tags"));
-
 			inventionsList.add(invention);
 		}
 
