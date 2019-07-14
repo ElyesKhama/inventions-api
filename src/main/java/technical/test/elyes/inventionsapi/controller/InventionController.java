@@ -37,4 +37,12 @@ public class InventionController {
 		return null;
 	}
 
+	@RequestMapping(value = "/inventions/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public String deleteInvention(@PathVariable("id") int id) {
+		InventionsCRUD.deleteInventionById(id);
+		return null;
+	}
+
+
 }

@@ -29,6 +29,22 @@ public class InventionsCRUD {
 		return null;
 	}
 
+	public static void postInvention(Invention inv) {
+		listInventions.add(inv);
+		// sort the list by date
+		listInventions.sort(new SortByDate());
+	}
+
+	public static void deleteInventionById(int id) {
+
+		for (int i = 0; i < listInventions.size(); i++) {
+			Invention inv = listInventions.get(i);
+			if (inv.getId() == id)
+				listInventions.remove(i);
+		}
+		
+	}
+
 	public static ArrayList<Invention> buildListInvention() {
 		ArrayList<Invention> inventionsList = new ArrayList<Invention>();
 
@@ -54,9 +70,4 @@ public class InventionsCRUD {
 		return inventionsList;
 	}
 
-	public static void postInvention(Invention inv) {
-		listInventions.add(inv);
-		// sort the list by date
-		listInventions.sort(new SortByDate());
-	}
 }
