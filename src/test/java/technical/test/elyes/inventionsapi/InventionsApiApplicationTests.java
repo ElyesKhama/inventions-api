@@ -46,10 +46,21 @@ public class InventionsApiApplicationTests {
 
 	@Test
 	public void shouldReturnBodyMalFormedPostInvention() throws Exception {
-		// test if 400 error if we don't provide the name
+		// test if the return status code is 400 if we don't provide the name
 		Invention inv = new Invention();
 		inv.setDate(1234);
 		this.mockMvc.perform(post("/inventions").contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(inv))).andExpect(status().isBadRequest());
 	}
+
+	@Test
+	public void shouldReturnStatusOKPostInvention() throws Exception {
+		// test if the return status code is 201 if we provide the name
+		Invention inv = new Invention();
+		inv.setName("toto");
+		inv.setDate(1234);
+		this.mockMvc.perform(post("/inventions").contentType(MediaType.APPLICATION_JSON)
+				.content(objectMapper.writeValueAsString(inv))).andExpect(status().isCreated());
+	}
+
 }
