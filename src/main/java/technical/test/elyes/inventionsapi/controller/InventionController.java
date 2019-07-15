@@ -5,11 +5,13 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import technical.test.elyes.inventionsapi.dao.InventionsCRUD;
@@ -36,28 +38,30 @@ public class InventionController {
 	// POST /inventions --> Add an invention
 	@RequestMapping(value = "/inventions", method = RequestMethod.POST)
 	@ResponseBody
-	public String postInvention(@Valid @RequestBody Invention inv) {
+	@ResponseStatus(HttpStatus.CREATED) // 201
+	public ArrayList<Invention> postInvention(@Valid @RequestBody Invention inv) {
 		// Ensure that the body contains at a name
 		if (inv.getName() == null)
 			throw new WrongPostBodyException();
 		InventionsCRUD.postInvention(inv);
-		return null;
+		return InventionsCRUD.getInventions();
 	}
 
 	// DELETE /inventions/:id --> Delete a specific invention
 	@RequestMapping(value = "/inventions/{id}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public String deleteInvention(@PathVariable("id") int id) {
+	public ArrayList<Invention> deleteInvention(@PathVariable("id") int id) {
 		InventionsCRUD.deleteInventionById(id);
-		return null;
+		return InventionsCRUD.getInventions();
 	}
 
 	// PUT /inventions/init --> Replace current inventions list
 	@RequestMapping(value = "/inventions/init", method = RequestMethod.PUT)
 	@ResponseBody
-	public String putInvention(@Valid @RequestBody ArrayList<Invention> listInv) {
+	@ResponseStatus(HttpStatus.CREATED) // 201
+	public ArrayList<Invention> putInvention(@Valid @RequestBody ArrayList<Invention> listInv) {
 		InventionsCRUD.putInvention(listInv);
-		return null;
+		return InventionsCRUD.getInventions();
 	}
 
 	// GET /inventions/tag/:tag --> Get all inventions containing a specific tag
@@ -71,6 +75,8 @@ public class InventionController {
 	@RequestMapping(value = "/inventions/{id}/discovery", method = RequestMethod.GET)
 	public Invention getInventionWithCommonPoints(@PathVariable("id") int id) {
 		Invention invention = InventionsCRUD.getInventionById(id);
+		if (invention == null)
+			return null;
 		if (invention.getTags() != null) {
 			return InventionsCRUD.getInventionWithCommonPoints(invention);
 		}
