@@ -15,6 +15,7 @@ public class InventionsCRUD {
 	 */
 
 	static ArrayList<Invention> listInventions = buildListInventions();
+	static int lastId;
 
 	public static ArrayList<Invention> getInventions() {
 		return listInventions;
@@ -34,6 +35,7 @@ public class InventionsCRUD {
 	}
 
 	public static void postInvention(Invention inv) {
+		inv.setId(lastId++);
 		listInventions.add(inv);
 		// sort the list by date
 		listInventions.sort(new SortByDate());
@@ -107,7 +109,8 @@ public class InventionsCRUD {
 
 		JSONArray jsonArray = ReadJSON.ReadJSONFile();
 
-		for (int i = 0; i < jsonArray.size(); i++) {
+		int i;
+		for (i = 0; i < jsonArray.size(); i++) {
 			JSONObject obj = (JSONObject) jsonArray.get(i);
 			Invention invention = new Invention();
 			invention.setId(i);
@@ -119,6 +122,9 @@ public class InventionsCRUD {
 			invention.setTags((ArrayList<String>) obj.get("tags"));
 			inventionsList.add(invention);
 		}
+
+		// store the number of inventions
+		lastId = i;
 
 		// sort the list by date
 		inventionsList.sort(new SortByDate());

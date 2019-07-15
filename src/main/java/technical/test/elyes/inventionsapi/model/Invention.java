@@ -2,6 +2,8 @@ package technical.test.elyes.inventionsapi.model;
 
 import java.util.ArrayList;
 
+import javax.validation.constraints.NotBlank;
+
 //Model class for invention
 public class Invention {
 
