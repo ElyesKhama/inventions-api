@@ -64,6 +64,6 @@ Endpoints :
       ]
      }
     ]
-   ``` 
-  - GET /inventions/tag/:tag
-  - GET /inventions/:id/discovery
+   ```
+- GET /inventions/tag/:tag
+- GET /inventions/:id/discovery
